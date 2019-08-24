@@ -89,7 +89,7 @@ if (defined('WISHLISTS_MODULE_VERSION')) {
  //
 if (function_exists('zen_page_key_exists')) {
     if (!zen_page_key_exists('toolsWishlist')) {
-        zen_register_admin_page('toolsWishlist', 'BOX_TOOLS_WISHLIST', 'FILENAME_WISHLIST', '', 'tools', 'Y', init_wishlist_next_sort ('tools'));
+        zen_register_admin_page('toolsWishlist', 'BOX_TOOLS_WISHLISTS', 'FILENAME_WISHLISTS', '', 'tools', 'Y', init_wishlist_next_sort ('tools'));
     }
     if (!zen_page_key_exists('configWishListModule')) {
         zen_register_admin_page('configWishListModule', 'BOX_CONFIGURATION_WISHLIST', 'FILENAME_CONFIGURATION', "gID=$cgi", 'configuration', 'Y', init_wishlist_next_sort ('configuration'));
