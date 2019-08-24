@@ -99,6 +99,6 @@ if (function_exists('zen_page_key_exists')) {
     // -----
     // Now, update the current configuration version for the plugin.
     //
-    $db->Execute("UPDATE " . TABLE_CONFIGURATION . " SET configuration_value = '" . $version_release_date . "' WHERE configuration_key = 'WISHLIST_MODULE_VERSION' LIMIT 1");
+    $db->Execute("UPDATE " . TABLE_CONFIGURATION . " SET configuration_value = '" . $version_release_date . "' WHERE configuration_key = 'WISHLISTS_MODULE_VERSION' LIMIT 1");
 }
 
