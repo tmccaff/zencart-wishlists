@@ -14,7 +14,7 @@
   if ( zen_not_null($id) ) {
 		$wishlist = $oWishlist->getWishlist($id);
   } else {
-  	zen_redirect(UN_FILENAME_WISHLISTS);
+  	zen_redirect(FILENAME_WISHLISTS);
   	exit;
   }
   
