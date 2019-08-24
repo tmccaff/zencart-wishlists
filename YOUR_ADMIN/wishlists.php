@@ -63,10 +63,10 @@
 <?php while (!$records->EOF) { ?>
 	<tr>
 		<td class="dataTableContent"><?php echo un_get_fullname($records->fields['customers_firstname'], $records->fields['customers_lastname'], $records->fields['customers_email_address']); ?></td>
-		<td class="dataTableContent"><a href="<?php echo zen_href_link(UN_FILENAME_WISHLIST, 'wid=' . $records->fields['id']);?>"><?php echo $records->fields['name']; ?></a></td>
+		<td class="dataTableContent"><a href="<?php echo zen_href_link(FILENAME_WISHLIST, 'wid=' . $records->fields['id']);?>"><?php echo $records->fields['name']; ?></a></td>
 		<td class="dataTableContent" align="right"><?php echo $records->fields['items_count']; ?></td>
 		<td class="dataTableContent" align="right">
-			<a href="<?php echo zen_href_link(UN_FILENAME_WISHLISTS, 'wid=' . $records->fields['id'] . '&action=delete'); ?>" onclick="javascript:return confirm('Are you sure you want to Delete this record?')"><?php echo zen_image(DIR_WS_IMAGES . 'icon_delete.gif', ICON_DELETE); ?></a>
+			<a href="<?php echo zen_href_link(FILENAME_WISHLISTS, 'wid=' . $records->fields['id'] . '&action=delete'); ?>" onclick="javascript:return confirm('Are you sure you want to Delete this record?')"><?php echo zen_image(DIR_WS_IMAGES . 'icon_delete.gif', ICON_DELETE); ?></a>
 		</td>
 	</tr>
 	<?php $records->MoveNext(); ?>
