@@ -86,10 +86,19 @@ if (defined('WISHLISTS_MODULE_VERSION')) {
             );
         
  // Register the admin-level pages for use.
-    //
-    if (function_exists('zen_page_key_exists')) {
-        if (!zen_page_key_exists('configWishListModule')) {
-            zen_register_admin_page('configWishListModule', 'BOX_CONFIGURATION_WISHLIST', 'FILENAME_CONFIGURATION', "gID=$cgi", 'configuration', 'Y', init_wishlist_next_sort ('configuration'));
+ //
+if (function_exists('zen_page_key_exists')) {
+    if (!zen_page_key_exists('toolsWishlist')) {
+        zen_register_admin_page('toolsWishlist', 'BOX_TOOLS_WISHLIST', 'FILENAME_WISHLIST', '', 'tools', 'Y', init_wishlist_next_sort ('tools'));
+    }
+    if (!zen_page_key_exists('configWishListModule')) {
+        zen_register_admin_page('configWishListModule', 'BOX_CONFIGURATION_WISHLIST', 'FILENAME_CONFIGURATION', "gID=$cgi", 'configuration', 'Y', init_wishlist_next_sort ('configuration'));
         }
-define('WISHLISTS_VERSION', '0.0.0');
-    }    
+    }
+
+    // -----
+    // Now, update the current configuration version for the plugin.
+    //
+    $db->Execute("UPDATE " . TABLE_CONFIGURATION . " SET configuration_value = '" . $version_release_date . "' WHERE configuration_key = 'WISHLIST_MODULE_VERSION' LIMIT 1");
+}
+
