@@ -5,7 +5,7 @@
  * Return pull down menu for top-level categories
  *-----------------------------------------------------------------------*/
  
-function un_draw_categories_pull_down_menu($sName, $aValues, $sDefault = '', $sParameters = '') {
+function draw_categories_pull_down_menu($sName, $aValues, $sDefault = '', $sParameters = '') {
 	global $db;
 
 	if ( !is_array($aValues) ){
@@ -21,7 +21,7 @@ function un_draw_categories_pull_down_menu($sName, $aValues, $sDefault = '', $sP
 		);
 	}
 	
-	$categories = un_get_categories();
+	$categories = get_categories();
 	
 	while ( !$categories->EOF ) {
 		$aValues[] = array(
@@ -39,16 +39,16 @@ function un_draw_categories_pull_down_menu($sName, $aValues, $sDefault = '', $sP
  * Return pull down menu for layout views
  *-----------------------------------------------------------------------*/
  
-function un_draw_view_pull_down_menu($sName, $aValues, $sDefault = '', $sParameters = '') {
+function draw_view_pull_down_menu($sName, $aValues, $sDefault = '', $sParameters = '') {
 	
 	$aMore = array(
 		array(
 			'id' => 's',
-			'text' => UN_TEXT_COMPACT,
+			'text' => TEXT_COMPACT,
 		),
 		array(
 			'id' => 'e',
-			'text' => UN_TEXT_EXTENDED,
+			'text' => TEXT_EXTENDED,
 		),
 	);
 
@@ -67,7 +67,7 @@ function un_draw_view_pull_down_menu($sName, $aValues, $sDefault = '', $sParamet
 	} else {
 		$aValues = $aMore;
 	}
-	$defaultview = UN_DEFAULT_LIST_VIEW;
+	$defaultview = DEFAULT_LIST_VIEW;
 	if ($defaultview == 'extended') {
 		$defaultview = 'e';
 	} else {
@@ -82,28 +82,28 @@ function un_draw_view_pull_down_menu($sName, $aValues, $sDefault = '', $sParamet
  * Return pull down menu for wishlist priority
  *-----------------------------------------------------------------------*/
  
-function un_draw_priority_pull_down_menu($sName, $aValues, $sDefault = '', $sParameters = '') {
+function draw_priority_pull_down_menu($sName, $aValues, $sDefault = '', $sParameters = '') {
 	
 	$aMore = array(
 		array(
 			'id' => '4',
-			'text' => UN_TEXT_PRIORITY_4,
+			'text' => TEXT_PRIORITY_4,
 		),
 		array(
 			'id' => '3',
-			'text' => UN_TEXT_PRIORITY_3,
+			'text' => TEXT_PRIORITY_3,
 		),
 		array(
 			'id' => '2',
-			'text' => UN_TEXT_PRIORITY_2,
+			'text' => TEXT_PRIORITY_2,
 		),
 		array(
 			'id' => '1',
-			'text' => UN_TEXT_PRIORITY_1,
+			'text' => TEXT_PRIORITY_1,
 		),
 		array(
 			'id' => '0',
-			'text' => UN_TEXT_PRIORITY_0,
+			'text' => TEXT_PRIORITY_0,
 		),
 	);
 
@@ -131,7 +131,7 @@ function un_draw_priority_pull_down_menu($sName, $aValues, $sDefault = '', $sPar
  * Return pull down menu for wishlist priority (small)
  *-----------------------------------------------------------------------*/
  
-function un_draw_priority_pull_down_menu_s($sName, $aValues, $sDefault = '', $sParameters = '') {
+function draw_priority_pull_down_menu_s($sName, $aValues, $sDefault = '', $sParameters = '') {
 	
 	$aMore = array();
 	for ( $i=1; $i <= 4; $i++ ) {
