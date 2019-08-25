@@ -2,7 +2,7 @@
 
 // Write a pre-formatted array contents
 //-----------------------------------------------------------------
-function un_dump($var, $description=NULL) {
+function dump($var, $description=NULL) {
     echo "<pre>";
     if ( !is_null($description) ) {
 		echo $description.":\n";
@@ -40,7 +40,7 @@ function get_top_category($categories_id) {
 // Test value for contents 
 //-----------------------------------------------------------------
 
-function un_is_empty($value) {
+function is_empty($value) {
 	if ( strlen(trim($value)) == 0 ) {
 		return true;
 	} else {
@@ -52,11 +52,11 @@ function un_is_empty($value) {
 /*
  * Return subjects (parent_id=0)
  *-----------------------------------------------------------------------*/
-function un_get_categories($fields = '') {
+function get_categories($fields = '') {
 	global $db;
 	
 	if ( is_array($fields) ) {
-		$fields_string = un_create_sql_field_string($fields, 'cd.');
+		$fields_string = create_sql_field_string($fields, 'cd.');
 	} else {
 		$fields_string = '';
 	}
@@ -76,7 +76,7 @@ function un_get_categories($fields = '') {
 /*
  * Return sql string of fields
  *-----------------------------------------------------------------------*/
-function un_create_sql_field_string($aFields, $sAlias = 'pd.') {
+function create_sql_field_string($aFields, $sAlias = 'pd.') {
 
 	$sComma = ',';
 	$sFields = $sAlias . implode($sComma.$sAlias, $aFields) . $sComma;
@@ -88,7 +88,7 @@ function un_create_sql_field_string($aFields, $sAlias = 'pd.') {
 /*
  * Return option with sorting capabilities
  *-----------------------------------------------------------------------*/
-function un_create_sort_option($sortby, $colnum, $heading) {
+function create_sort_option($sortby, $colnum, $heading) {
 	
 	if ($sortby) {
 		if ( substr($sortby, 0, 1) == $colnum ) {
@@ -124,7 +124,7 @@ function un_create_sort_option($sortby, $colnum, $heading) {
  * Return formatted full name given first and last
  *-----------------------------------------------------------------------*/
 
-function un_get_fullname($firstname='', $lastname='', $default='') {
+function get_fullname($firstname='', $lastname='', $default='') {
 
     if ( zen_not_null($firstname) && zen_not_null($lastname) ) {
 		$name = $firstname . " " . $lastname;
@@ -144,7 +144,7 @@ function un_get_fullname($firstname='', $lastname='', $default='') {
  * Return formatted city and state given city and state
  *-----------------------------------------------------------------------*/
 
-function un_get_citystate($firstname='', $lastname='', $default='') {
+function get_citystate($firstname='', $lastname='', $default='') {
 
     if ( zen_not_null($firstname) && zen_not_null($lastname) ) {
 		$name = $firstname . ", " . $lastname;
@@ -164,13 +164,13 @@ function un_get_citystate($firstname='', $lastname='', $default='') {
  * Check required fields of html form
  *-----------------------------------------------------------------------*/
 
-function un_check_html_form($class) {
+function check_html_form($class) {
 	global $messageStack;
 
 	if ( isset($_POST['meta-process']) && $_POST['meta-process'] == 1 ) {
 		$status = true;
 		foreach ( $_POST as $key => $value ) {
-			if ( strstr($key, 'required-') && un_is_empty($value) ) {
+			if ( strstr($key, 'required-') && is_empty($value) ) {
 				$status = false;
 				$messageStack->add($class, 'Please fill-in the &quot;' . ucfirst(str_replace('required-', '', $key)) . '&quot; field.');
 			}
