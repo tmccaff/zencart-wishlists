@@ -1,5 +1,4 @@
-<div id="wishlist"> <!-- begin wishlist id for styling -->
-
+<div id="wishlist">
 <h1><?php echo HEADING_TITLE; ?></h1>
 
 <p><?php echo TEXT_DESCRIPTION; ?></p>
@@ -10,32 +9,32 @@ if ( $messageStack->size('wishlist_move') > 0 ) {
 }
 ?>
 
-<?php if ( UN_ALLOW_MULTIPLE_WISHLISTS===true ) { ?>
+<?php if ( ALLOW_MULTIPLE_WISHLISTS===true ) { ?>
 <ul>
-	<li><a href="<?php echo zen_href_link(UN_FILENAME_WISHLIST_EDIT, 'op=add', 'SSL'); ?>"><?php echo UN_TEXT_NEW_WISHLIST; ?></a></li>
-	<li><a href="<?php echo zen_href_link(UN_FILENAME_WISHLISTS, '', 'SSL'); ?>"><?php echo UN_TEXT_MANAGE_WISHLISTS; ?></a></li>
+	<li><a href="<?php echo zen_href_link(FILENAME_WISHLIST_EDIT, 'op=add', 'SSL'); ?>"><?php echo TEXT_NEW_WISHLIST; ?></a></li>
+	<li><a href="<?php echo zen_href_link(FILENAME_WISHLISTS, '', 'SSL'); ?>"><?php echo TEXT_MANAGE_WISHLISTS; ?></a></li>
 </ul>
 <?php } ?>
 
 <!-- control -->
-<?php echo zen_draw_form('control', zen_href_link(UN_FILENAME_WISHLIST_MOVE, '', 'SSL'), 'get', 'class="control"'); ?>
+<?php echo zen_draw_form('control', zen_href_link(FILENAME_WISHLIST_MOVE, '', 'SSL'), 'get', 'class="control"'); ?>
 <?php echo zen_hide_session_id(); ?>
-<?php echo zen_draw_hidden_field('main_page', UN_FILENAME_WISHLIST_MOVE); ?>
+<?php echo zen_draw_hidden_field('main_page', FILENAME_WISHLIST_MOVE); ?>
 <?php echo zen_draw_hidden_field('wid', $id); ?>
 <fieldset>
 
 	<div class="multiple">
-	<label for="sort"><?php echo UN_TEXT_SORT . UN_LABEL_DELIMITER; ?></label>
+	<label for="sort"><?php echo TEXT_SORT . LABEL_DELIMITER; ?></label>
 	<?php 
 	echo zen_draw_pull_down_menu('sort', $aSortOptions, (isset($_GET['sort']) ? $_GET['sort'] : ''), 'class="m" onchange="this.form.submit()"');
 	?>
 	</div>
 	
-<?php if ( UN_DISPLAY_CATEGORY_FILTER===true ) { ?>
+<?php if ( DISPLAY_CATEGORY_FILTER===true ) { ?>
 	<div class="multiple">
-	<label for="cPath"><?php echo UN_TEXT_SHOW . UN_LABEL_DELIMITER; ?></label>
+	<label for="cPath"><?php echo TEXT_SHOW . LABEL_DELIMITER; ?></label>
 	<?php
-	echo un_draw_categories_pull_down_menu('cPath', UN_TEXT_ALL_CATEGORIES, (isset($_GET['cPath']) ? $_GET['cPath'] : ''), 'class="m" onchange="this.form.submit()"');
+	echo draw_categories_pull_down_menu('cPath', TEXT_ALL_CATEGORIES, (isset($_GET['cPath']) ? $_GET['cPath'] : ''), 'class="m" onchange="this.form.submit()"');
 	?>
 	</div>
 <?php } ?>
@@ -54,14 +53,14 @@ if ( $messageStack->size('wishlist_move') > 0 ) {
 	
 <?php } // end paging top ?>
 
-<?php echo zen_draw_form('wishlist_move', zen_href_link(UN_FILENAME_WISHLIST_MOVE, '', 'SSL')); ?>
+<?php echo zen_draw_form('wishlist_move', zen_href_link(FILENAME_WISHLIST_MOVE, '', 'SSL')); ?>
 <?php echo zen_hide_session_id(); ?>
 <?php echo zen_draw_hidden_field('meta-process', 1); ?>
 <?php echo zen_draw_hidden_field('wid', $id); ?>
 
 <fieldset>
 <div class="single">
-<label for="wishlists_id"><?php echo LABEL_MOVETO . UN_LABEL_DELIMITER; ?></label>
+<label for="wishlists_id"><?php echo LABEL_MOVETO . LABEL_DELIMITER; ?></label>
 <?php
 echo $oWishlist->getWishlistMenu('wishlists_id', (isset($_REQUEST['wid']) ? $_REQUEST['wid'] : ''), 'class="m"');
 ?> 
@@ -101,7 +100,7 @@ if ($listing_split->number_of_rows > 0) {
 	<?php } // end while products ?>
 	
 <?php } else { ?>
-	<tr><td colspan="99"><?php echo UN_TEXT_NO_PRODUCTS; ?></td></tr>
+	<tr><td colspan="99"><?php echo TEXT_NO_PRODUCTS; ?></td></tr>
 	
 <?php } ?>
 
@@ -123,4 +122,4 @@ if ($listing_split->number_of_rows > 0) {
 <?php echo zen_back_link() . zen_image_button(BUTTON_IMAGE_BACK, BUTTON_BACK_ALT) . '</a>'; ?>
 </div>
 
-</div> <!-- end (un) id for styling -->
+</div> 
