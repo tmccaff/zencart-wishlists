@@ -1,5 +1,4 @@
-<div id="wishlist"> <!-- begin wishlist id for styling -->
-
+<div id="wishlist"> 
 <?php if ( isset($_GET['op']) && $_GET['op']=='edit' ) { ?>
 <h1><?php HEADING_TITLE_EDIT; ?></h1>
 
@@ -10,13 +9,13 @@
 <p><?php echo TEXT_DESCRIPTION; ?></p>
 <?php } ?>
 
-<?php if ($messageStack->size('un_wishlist_edit') > 0) { 
-	echo $messageStack->output('un_wishlist_edit'); 
+<?php if ($messageStack->size('wishlist_edit') > 0) { 
+	echo $messageStack->output('wishlist_edit'); 
 } ?>
 
 <p class="inputrequirement"><?php echo FORM_REQUIRED_INFORMATION; ?></p>
 
-<?php echo zen_draw_form('un_wishlist_edit', zen_href_link(UN_FILENAME_WISHLIST_EDIT, '', 'SSL')); ?>
+<?php echo zen_draw_form('wishlist_edit', zen_href_link(FILENAME_WISHLIST_EDIT, '', 'SSL')); ?>
 <?php echo zen_draw_hidden_field('meta-process', 1); ?>
 <?php echo zen_draw_hidden_field('op', $_GET['op']); ?>
 <?php echo zen_draw_hidden_field('wid', $_GET['wid']); ?>
@@ -25,7 +24,7 @@
 	<div class="group">
 
 	<div class="formrow">
-		<label class="block" for="required-name"><?php echo FORM_LABEL_NAME; ?><span class="inputrequirement"><?php echo UN_TEXT_FORM_FIELD_REQUIRED; ?></span></label>
+		<label class="block" for="required-name"><?php echo FORM_LABEL_NAME; ?><span class="inputrequirement"><?php echo TEXT_FORM_FIELD_REQUIRED; ?></span></label>
 		<input type="text" name="required-name" value="<?php echo $_POST['required-name']? $_POST['required-name']: $records->fields['name']; ?>" class="l" />
 	</div>
 
@@ -56,4 +55,4 @@
 <dd><?php echo TEXT_PRIVACY; ?></dd>
 </dl>
 
-</div> <!-- end (un) id for styling -->
+</div> 
