@@ -1,11 +1,11 @@
 <?php 
 // Get wishlist class and instantiate
 require_once(DIR_WS_CLASSES . 'wishlist_class.php');
-$oWishlist = new un_wishlist();
+$oWishlist = new wishlist();
 
 $structure = array(
 	array(
-		'label'			=>	UN_TABLE_HEADING_PRODUCTS,
+		'label'			=>	TABLE_HEADING_PRODUCTS,
 		'field'			=>	'pd.products_name',
 		'column_order'	=>	1,
 		'default'		=>	true,
@@ -13,7 +13,7 @@ $structure = array(
 		'command'		=>	'product',
 	),
 	array(
-		'label'			=>	UN_TABLE_HEADING_PRICE,
+		'label'			=>	TABLE_HEADING_PRICE,
 		'field'			=>	'p.products_price',
 		'column_order'	=>	2,
 		'default'		=>	false,
@@ -22,7 +22,7 @@ $structure = array(
 		'command'		=>	'price',
 	),
 	array(
-		'label'			=>	UN_TEXT_PRIORITY,
+		'label'			=>	TEXT_PRIORITY,
 		'field'			=>	'p2w.priority',
 		'column_order'	=>	3,
 		'default'		=>	false,
@@ -31,7 +31,7 @@ $structure = array(
 		'command'		=>	'field_value',
 	),
 	array(
-		'label'			=>	UN_TEXT_COMMENT,
+		'label'			=>	TEXT_COMMENT,
 		'field'			=>	'p2w.comment',
 		'column_order'	=>	4,
 		'default'		=>	false,
@@ -41,7 +41,7 @@ $structure = array(
 	);
 $structure_addcart = array(
 	array(
-		'label'			=>	UN_TABLE_HEADING_BUY_NOW,
+		'label'			=>	TABLE_HEADING_BUY_NOW,
 		'field'			=>	'',
 		'column_order'	=>	5,
 		'default'		=>	false,
@@ -50,9 +50,9 @@ $structure_addcart = array(
 		'command'		=>	'addcart_multi',
 		),
 	);
-if (UN_ALLOW_MULTIPLE_PRODUCTS_CART_COMPACT) $structure = array_merge($structure, $structure_addcart);
+if (ALLOW_MULTIPLE_PRODUCTS_CART_COMPACT) $structure = array_merge($structure, $structure_addcart);
 $error = true;
-if ( isset($_GET['wid']) && !un_is_empty($_GET['wid']) ) {
+if ( isset($_GET['wid']) && !is_empty($_GET['wid']) ) {
 
 	$oWishlist->setWishlistId($_GET['wid']);
 	$customers = $oWishlist->getCustomerData();
@@ -61,7 +61,7 @@ if ( isset($_GET['wid']) && !un_is_empty($_GET['wid']) ) {
 		$error = false;
 		#$wid = $customers->fields['customers_id'];
 		$wid = $_GET['wid'];
-		$customers_name = un_get_fullname($customers->fields['customers_firstname'], $customers->fields['customers_lastname'], $customers->fields['customers_email_address']);
+		$customers_name = get_fullname($customers->fields['customers_firstname'], $customers->fields['customers_lastname'], $customers->fields['customers_email_address']);
 	} else {
 		$error = true;
 		$message = TEXT_CUSTOMER_ID_NOT_FOUND;
@@ -69,18 +69,18 @@ if ( isset($_GET['wid']) && !un_is_empty($_GET['wid']) ) {
 	
 } else {
 
-	if ( $_POST['meta-process']==1 && (!un_is_empty($_POST['firstname']) || !un_is_empty($_POST['lastname']) || !un_is_empty($_POST['email'])) ) {
+	if ( $_POST['meta-process']==1 && (!is_empty($_POST['firstname']) || !is_empty($_POST['lastname']) || !is_empty($_POST['email'])) ) {
 		
-		$aArgs['firstname'] = (isset($_POST['firstname']) && ! un_is_empty($_POST['firstname']) ? $_POST['firstname'] : '%');
-		$aArgs['lastname'] = (isset($_POST['lastname']) && ! un_is_empty($_POST['lastname']) ? $_POST['lastname'] : '%');
-		$aArgs['email'] = (isset($_POST['email']) && ! un_is_empty($_POST['email']) ? $_POST['email'] : '%');
+		$aArgs['firstname'] = (isset($_POST['firstname']) && ! is_empty($_POST['firstname']) ? $_POST['firstname'] : '%');
+		$aArgs['lastname'] = (isset($_POST['lastname']) && ! is_empty($_POST['lastname']) ? $_POST['lastname'] : '%');
+		$aArgs['email'] = (isset($_POST['email']) && ! is_empty($_POST['email']) ? $_POST['email'] : '%');
 		$records = $oWishlist->findWishlists($aArgs);
 		
 		if ( $records->RecordCount() == 1 ) {
 			$error = false;
 			#$wid = $records->fields['customers_id'];
 			$wid = $records->fields['id'];
-			$customers_name = un_get_fullname($records->fields['customers_firstname'], $records->fields['customers_lastname'], $records->fields['customers_email_address']);
+			$customers_name = get_fullname($records->fields['customers_firstname'], $records->fields['customers_lastname'], $records->fields['customers_email_address']);
 		} elseif ( $records->RecordCount() > 1 ) {
 			$error = true;
 			$message = $records->RecordCount() . TEXT_RESULT_RECORDS_FOUND;
@@ -101,7 +101,7 @@ if ( $error === false ) {
 	$products_query = $oWishlist->getProductsQuery();
 	$aSortOptions = $oWishlist->getSortOptions(isset($_GET['sort'])? $_GET['sort']: '');
 
-$defaultview = UN_DEFAULT_LIST_VIEW;
+$defaultview = DEFAULT_LIST_VIEW;
 if ($defaultview == 'extended') {
 	$defaultview = 'e';
 } else {
@@ -114,15 +114,15 @@ if ( isset($_REQUEST['layout']) && $_REQUEST['layout'] == 'e' ) $whatpage = 2;
 //echo $whatpage;
 switch ($whatpage) {
 	case '1' :
-			$listing_split = new splitPageResults($products_query, UN_MAX_DISPLAY_COMPACT);
+			$listing_split = new splitPageResults($products_query, MAX_DISPLAY_COMPACT);
 			$tpl_page_body = 'tpl_wishlist_find_s.php';
 			break;
 	case '2' :
-			$listing_split = new splitPageResults($products_query, UN_MAX_DISPLAY_EXTENDED);
+			$listing_split = new splitPageResults($products_query, MAX_DISPLAY_EXTENDED);
 			$tpl_page_body = 'tpl_wishlist_find_default.php';
 			break;
 	default :
-			$listing_split = new splitPageResults($products_query, UN_MAX_DISPLAY_COMPACT);
+			$listing_split = new splitPageResults($products_query, MAX_DISPLAY_COMPACT);
 			$tpl_page_body = 'tpl_wishlist_find_s.php';
 			break;
 		}
