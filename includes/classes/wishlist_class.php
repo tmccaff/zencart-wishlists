@@ -13,7 +13,7 @@ require_once('wishlist_productlist_class.php');
  *
  */
 
-class un_wishlist extends un_productlist {
+class wishlist extends productlist {
     
     /** 
      * unique identifier for a wishlist
@@ -73,7 +73,7 @@ class un_wishlist extends un_productlist {
      */
     var $_aStructure = array(
 		array(
-			'label'			=>	UN_TABLE_HEADING_PRODUCTS,
+			'label'			=>	TABLE_HEADING_PRODUCTS,
 			'field'			=>	'pd.products_name',
 			'column_order'	=>	1,
 			'default'		=>	true,
@@ -81,7 +81,7 @@ class un_wishlist extends un_productlist {
 			'command'		=>	'product',
 		),
 		array(
-			'label'			=>	UN_TABLE_HEADING_PRICE,
+			'label'			=>	TABLE_HEADING_PRICE,
 			'field'			=>	'p.products_price',
 			'column_order'	=>	2,
 			'default'		=>	false,
@@ -90,7 +90,7 @@ class un_wishlist extends un_productlist {
 			'command'		=>	'price',
 		),
 		array(
-			'label'			=>	UN_TEXT_PRIORITY,
+			'label'			=>	TEXT_PRIORITY,
 			'field'			=>	'p2w.priority',
 			'column_order'	=>	3,
 			'default'		=>	false,
@@ -99,7 +99,7 @@ class un_wishlist extends un_productlist {
 			'command'		=>	'priority_menu_s',
 		),
 		array(
-			'label'			=>	UN_TEXT_REMOVE,
+			'label'			=>	TEXT_REMOVE,
 			'field'			=>	'',
 			'column_order'	=>	4,
 			'default'		=>	false,
@@ -108,7 +108,7 @@ class un_wishlist extends un_productlist {
 			'command'		=>	'deletewish_checkbox',
 		),
 		array(
-			'label'			=>	UN_TABLE_HEADING_BUY_NOW,
+			'label'			=>	TABLE_HEADING_BUY_NOW,
 			'field'			=>	'',
 			'column_order'	=>	5,
 			'default'		=>	false,
@@ -127,7 +127,7 @@ class un_wishlist extends un_productlist {
      * @param integer $iPollId [optional] poll id
      * @access public
 	/*----------------------------------------------------------*/
-	function un_wishlist($iCustomerId=NULL) {
+	function wishlist($iCustomerId=NULL) {
     	global $db, $messageStack;
         
         // implement db object
@@ -210,7 +210,7 @@ class un_wishlist extends un_productlist {
 		
 		$result = $this->_oDB->Execute($sql);
 		if ( !$result ) {
-			$this->_oMessages->add($this->_sName, UN_ERROR_GET_ID);
+			$this->_oMessages->add($this->_sName, ERROR_GET_ID);
 				return false;
 		}
 		
@@ -224,7 +224,7 @@ class un_wishlist extends un_productlist {
 	
 	function getCustomerData() {
 	
-		if ( !isset($this->_iWishlistId) || un_is_empty($this->_iWishlistId) ) {
+		if ( !isset($this->_iWishlistId) || is_empty($this->_iWishlistId) ) {
 			return false;
 		}
 		
@@ -240,7 +240,7 @@ class un_wishlist extends un_productlist {
 		
 		$result = $this->_oDB->Execute($sql);
 		if ( !$result ) {
-			$this->_oMessages->add($this->_sName, UN_ERROR_GET_CUSTDATA);
+			$this->_oMessages->add($this->_sName, ERROR_GET_CUSTDATA);
 				return false;
 		}
 		
@@ -256,13 +256,13 @@ class un_wishlist extends un_productlist {
 	/*----------------------------------------------------------*/
 	function hasPermission() {
 		
-		if ( un_is_empty($this->_iWishlistId) ) {
-			$this->_oMessages->add($this->_sName, UN_ERROR_GET_PERMISSION);
+		if ( is_empty($this->_iWishlistId) ) {
+			$this->_oMessages->add($this->_sName, ERROR_GET_PERMISSION);
 			return false;
 		}
 		
-		if ( un_is_empty($this->_iCustomerId) ) {
-			$this->_oMessages->add($this->_sName, UN_ERROR_GET_PERMISSION);
+		if ( is_empty($this->_iCustomerId) ) {
+			$this->_oMessages->add($this->_sName, ERROR_GET_PERMISSION);
 			return false;
 		}		
 		
@@ -277,7 +277,7 @@ class un_wishlist extends un_productlist {
 		
 		$result = $this->_oDB->Execute($sql);
 		if ( (int)$result->fields['items_count']==0 ) {
-			$this->_oMessages->add($this->_sName, UN_ERROR_GET_PERMISSION);
+			$this->_oMessages->add($this->_sName, ERROR_GET_PERMISSION);
 				return false;
 		}
 		
@@ -469,9 +469,9 @@ class un_wishlist extends un_productlist {
 		
 		$result = $this->_oDB->Execute($sql);
         if ( !$result ) {
-			$this->_oMessages->add($this->_sName, UN_ERROR_IS_PRIVATE);
-            return false;
-        }
+			$this->_oMessages->add($this->_sName, ERROR_IS_PRIVATE);
+		
+            return false;        }
         
 		if ( (int)$result->fields['public_status']==1 ) {
 			return true;
@@ -502,7 +502,7 @@ class un_wishlist extends un_productlist {
 		
 		$result = $this->_oDB->Execute($sql);
         if ( !$result ) {
-			$this->_oMessages->add($this->_sName, UN_ERROR_MAKE_DEFAULT_ZERO);
+			$this->_oMessages->add($this->_sName, ERROR_MAKE_DEFAULT_ZERO);
             return false;
         }
 		
@@ -520,7 +520,7 @@ class un_wishlist extends un_productlist {
 		
 		$result = $this->_oDB->Execute($sql);
         if ( !$result ) {
-			$this->_oMessages->add($this->_sName, UN_ERROR_MAKE_DEFAULT);
+			$this->_oMessages->add($this->_sName, ERROR_MAKE_DEFAULT);
             return false;
         }
         
@@ -549,7 +549,7 @@ class un_wishlist extends un_productlist {
 		
 		$result = $this->_oDB->Execute($sql);
         if ( !$result ) {
-			$this->_oMessages->add($this->_sName, UN_ERROR_MAKE_PUBLIC);
+			$this->_oMessages->add($this->_sName, ERROR_MAKE_PUBLIC);
             return false;
         }
         
@@ -578,7 +578,7 @@ class un_wishlist extends un_productlist {
 		
 		$result = $this->_oDB->Execute($sql);
         if ( !$result ) {
-			$this->_oMessages->add($this->_sName, UN_ERROR_MAKE_PRIVATE);
+			$this->_oMessages->add($this->_sName, ERROR_MAKE_PRIVATE);
             return false;
         }
         
@@ -598,7 +598,7 @@ class un_wishlist extends un_productlist {
 		
 		$result = $this->createWishlist(DEFAULT_WISHLIST_NAME, '', 1, 1);
 		if ( $result===false ) {
-			$this->_oMessages->add($this->_sName, UN_ERROR_CREATE_DEFAULT);
+			$this->_oMessages->add($this->_sName, ERROR_CREATE_DEFAULT);
 			return false;
 		}
 		$this->_iWishlistId = $result;
@@ -789,7 +789,7 @@ class un_wishlist extends un_productlist {
       
 				$result = $this->_oDB->Execute($sql);
 				if ( !$result ) {
-					$this->_oMessages->add($this->_sName, UN_ERROR_ADD_PRODUCT_WISHLIST);
+					$this->_oMessages->add($this->_sName, ERROR_ADD_PRODUCT_WISHLIST);
 					return false;
 				}
 			}
@@ -1148,7 +1148,6 @@ class un_wishlist extends un_productlist {
         //                                    'quantity' => $this->contents[$products_id]['qty'],
                                   'quantity' => $new_qty,
                                   'weight' => $products->fields['products_weight'] + $this->attributes_weight($products_id),
-                                  // fix here
                                   'final_price' => ($products_price + $this->attributes_price($products_id)),
                                   'onetime_charges' => ($this->attributes_price_onetime_charges($products_id, $new_qty)),
                                   'tax_class_id' => $products->fields['products_tax_class_id'],
