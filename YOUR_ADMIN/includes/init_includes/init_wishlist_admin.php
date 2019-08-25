@@ -94,7 +94,6 @@ if (function_exists('zen_page_key_exists')) {
     if (!zen_page_key_exists('configWishListModule')) {
         zen_register_admin_page('configWishListModule', 'BOX_CONFIGURATION_WISHLIST', 'FILENAME_CONFIGURATION', "gID=$cgi", 'configuration', 'Y', init_wishlist_next_sort ('configuration'));
         }
-    }
 
     // -----
     // Now, update the current configuration version for the plugin.
