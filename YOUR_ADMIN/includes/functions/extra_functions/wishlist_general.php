@@ -3,7 +3,7 @@
 // Write a pre-formatted array contents
 //-----------------------------------------------------------------
 
-function un_dump($var, $description=NULL) {
+function dump($var, $description=NULL) {
     echo "<pre>";
     if ( !is_null($description) ) {
 		echo $description.":\n";
@@ -22,7 +22,7 @@ function un_dump($var, $description=NULL) {
  * Return formatted full name given first and last
  *-----------------------------------------------------------------------*/
 
-function un_get_fullname($firstname='', $lastname='', $default='') {
+function get_fullname($firstname='', $lastname='', $default='') {
 
     if ( zen_not_null($firstname) && zen_not_null($lastname) ) {
 		$name = $firstname . " " . $lastname;
@@ -40,7 +40,7 @@ function un_get_fullname($firstname='', $lastname='', $default='') {
 /*
  * Return sql string of fields
  *-----------------------------------------------------------------------*/
-function un_create_sql_field_string($aFields, $sAlias = 'pd.') {
+function create_sql_field_string($aFields, $sAlias = 'pd.') {
 
 	$sComma = ',';
 	$sFields = $sAlias . implode($sComma.$sAlias, $aFields) . $sComma;
@@ -52,7 +52,7 @@ function un_create_sql_field_string($aFields, $sAlias = 'pd.') {
 /*
  * Return option with sorting capabilities
  *-----------------------------------------------------------------------*/
-function un_create_sort_option($sortby, $colnum, $heading) {
+function create_sort_option($sortby, $colnum, $heading) {
 	
 	if ($sortby) {
 		if ( substr($sortby, 0, 1) == $colnum ) {
