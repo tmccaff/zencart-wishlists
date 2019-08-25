@@ -6,11 +6,11 @@ zen_redirect(zen_href_link(FILENAME_LOGIN, '', 'SSL'));
 
 // Get wishlist class and instantiate
 require_once(DIR_WS_CLASSES . 'wishlist_class.php');
-$oWishlist = new un_wishlist($_SESSION['customer_id']);
+$oWishlist = new wishlist($_SESSION['customer_id']);
 
 // Use specified wishlist if wid set, else use default wishlist
 $id = isset($_REQUEST['wid']) ? (int) $_REQUEST['wid'] : '';
-if ( ! un_is_empty($id) ) {
+if ( ! is_empty($id) ) {
         $oWishlist->setWishlistId($id);
         if ( ! $oWishlist->hasPermission() ) {
                 zen_redirect(zen_href_link(FILENAME_WISHLISTS, '', 'SSL'));
