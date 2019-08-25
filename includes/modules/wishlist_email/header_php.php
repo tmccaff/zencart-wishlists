@@ -6,11 +6,11 @@ if ( !$_SESSION['customer_id'] ) {
 
 // Get wishlist class and instantiate
 require_once(DIR_WS_CLASSES . 'wishlist_class.php');
-$oWishlist = new un_wishlist($_SESSION['customer_id']);
+$oWishlist = new wishlist($_SESSION['customer_id']);
 
 // Use specified wishlist if wid set, else use default wishlist
 $id = isset($_REQUEST['wid']) ? (int) $_REQUEST['wid'] : '';
-if ( ! un_is_empty($id) ) {
+if ( ! is_empty($id) ) {
 	$oWishlist->setWishlistId($id);
 	if ( ! $oWishlist->hasPermission() ) {
 		zen_redirect(zen_href_link(FILENAME_WISHLISTS, '', 'SSL'));
@@ -51,7 +51,7 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
 		$email_body .= sprintf(TEXT_EMAIL_SIGNATURE, STORE_NAME, HTTP_SERVER . DIR_WS_CATALOG, $from_name);
 
 		// include disclaimer
-		$email_body .= "\n\n" . UN_EMAIL_SEPARATOR . EMAIL_ADVISORY . "\n\n";
+		$email_body .= "\n\n" . EMAIL_SEPARATOR . EMAIL_ADVISORY . "\n\n";
 		
 		zen_mail($to_name, $to_email_address, $email_subject, $email_body, $from_name, $from_email_address, array('EMAIL_MESSAGE_HTML' => nl2br($email_body)));
 
@@ -82,4 +82,4 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
 }
 $breadcrumb->add(NAVBAR_TITLE);
 require_once(DIR_WS_CLASSES . 'wishlist_class.php');
-$oWishlist = new un_wishlist($_SESSION['customer_id']);
+$oWishlist = new wishlist($_SESSION['customer_id']);
