@@ -6,7 +6,7 @@ $aSortOptions = $oWishlist->getSortOptions(isset($_GET['sort'])? $_GET['sort']: 
 $dispatch = $oWishlist->getDispatch();
 $structure = array(
 	array(
-		'label'			=>	UN_TABLE_HEADING_PRODUCTS,
+		'label'			=>	TABLE_HEADING_PRODUCTS,
 		'field'			=>	'pd.products_name',
 		'column_order'	=>	1,
 		'default'		=>	true,
@@ -14,7 +14,7 @@ $structure = array(
 		'command'		=>	'product',
 	),
 	array(
-		'label'			=>	UN_TABLE_HEADING_PRICE,
+		'label'			=>	TABLE_HEADING_PRICE,
 		'field'			=>	'p.products_price',
 		'column_order'	=>	2,
 		'default'		=>	false,
@@ -23,7 +23,7 @@ $structure = array(
 		'command'		=>	'price',
 	),
 	array(
-		'label'			=>	UN_TEXT_PRIORITY,
+		'label'			=>	TEXT_PRIORITY,
 		'field'			=>	'p2w.priority',
 		'column_order'	=>	3,
 		'default'		=>	false,
@@ -32,7 +32,7 @@ $structure = array(
 		'command'		=>	'priority_menu_s',
 	),
 	array(
-		'label'			=>	UN_TEXT_REMOVE,
+		'label'			=>	TEXT_REMOVE,
 		'field'			=>	'',
 		'column_order'	=>	4,
 		'default'		=>	false,
@@ -41,9 +41,9 @@ $structure = array(
 		'command'		=>	'deletewish_checkbox',
 		),
 	);
-if (!UN_ALLOW_MULTIPLE_PRODUCTS_CART_COMPACT) $oWishlist->setStructure($structure);
+if (!ALLOW_MULTIPLE_PRODUCTS_CART_COMPACT) $oWishlist->setStructure($structure);
 
-$defaultview = UN_DEFAULT_LIST_VIEW;
+$defaultview = DEFAULT_LIST_VIEW;
 if ($defaultview == 'extended') {
 	$defaultview = 'e';
 } else {
@@ -56,29 +56,16 @@ if ( isset($_REQUEST['layout']) && $_REQUEST['layout'] == 'e' ) $whatpage = 2;
 //echo $whatpage;
 switch ($whatpage) {
 	case '1' :
-			$listing_split = new splitPageResults($products_query, UN_MAX_DISPLAY_COMPACT);
+			$listing_split = new splitPageResults($products_query, MAX_DISPLAY_COMPACT);
 			$tpl_page_body = 'tpl_wishlist_s.php';
 			break;
 	case '2' :
-			$listing_split = new splitPageResults($products_query, UN_MAX_DISPLAY_EXTENDED);
+			$listing_split = new splitPageResults($products_query, MAX_DISPLAY_EXTENDED);
 			$tpl_page_body = 'tpl_wishlist_default.php';
 			break;
 	default :
-			$listing_split = new splitPageResults($products_query, UN_MAX_DISPLAY_COMPACT);
+			$listing_split = new splitPageResults($products_query, MAX_DISPLAY_COMPACT);
 			$tpl_page_body = 'tpl_wishlist_s.php';
 			break;
 		}
-	
-// 	if ( !isset($_REQUEST['layout']) && ($defaultview == 's') ) {
-// 	$listing_split = new splitPageResults($products_query, UN_MAX_DISPLAY_COMPACT);
-// 	$tpl_page_body = 'tpl_wishlist_s.php';	
-// 	} else {
-// 		if ( isset($_REQUEST['layout']) && $_REQUEST['layout'] == 's' ) {
-// 			$listing_split = new splitPageResults($products_query, UN_MAX_DISPLAY_COMPACT);
-// 			$tpl_page_body = 'tpl_wishlist_s.php';	
-// 		} else {
-// 			$listing_split = new splitPageResults($products_query, UN_MAX_DISPLAY_EXTENDED);
-// 			$tpl_page_body = 'tpl_wishlist_default.php';
-// 		}
-// }
 require($template->get_template_dir($tpl_page_body, DIR_WS_TEMPLATE, $current_page_base, 'templates') . '/' . $tpl_page_body);
