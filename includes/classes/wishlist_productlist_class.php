@@ -10,7 +10,7 @@
  *
  */
 
-class un_productlist {
+class productlist {
     
     /** 
      * fields for product list
@@ -81,7 +81,7 @@ class un_productlist {
      *
      * @access public
 	/*----------------------------------------------------------*/
-	function un_productlist() {
+	function productlist() {
     	global $db, $messageStack;
         
         // implement db object
@@ -162,7 +162,7 @@ class un_productlist {
 		foreach ( $define_list as $value ) {
 			if ( $value['sortable'] == true ) {
 		/* 		$lc_text = zen_create_sort_heading($current_option, $col+1, $lc_text); */
-				$lc_option = un_create_sort_option($current_option, $value['column_order'], $value['label']);
+				$lc_option = create_sort_option($current_option, $value['column_order'], $value['label']);
 				array_push($options, $lc_option);
 				
 				if ( substr($current_option, 0, 1) == $value['column_order'] ) {
@@ -201,7 +201,7 @@ class un_productlist {
 		}
 		array_multisort($sortarray,$define_list);
 		
-		$field_string = un_create_sql_field_string($extra_fields, '');
+		$field_string = create_sql_field_string($extra_fields, '');
 		$sql_select = "select " . substr($field_string, 0, strlen($field_string)-1) . " ";
 		$sql_filter = "";
 		if ( isset($_GET['cPath']) && $_GET['cPath'] ) {
@@ -364,7 +364,7 @@ class un_productlist {
 	}
 	
 	function _dispatchPriorityMenuSmall($map, $data) {
-		$value = un_draw_priority_pull_down_menu_s('priority[]', '', $data->fields['priority'], 'class="s"');
+		$value = draw_priority_pull_down_menu_s('priority[]', '', $data->fields['priority'], 'class="s"');
 		return $value;
 	}
 	
