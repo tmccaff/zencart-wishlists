@@ -9,9 +9,9 @@ if(ALLOW_MULTIPLE_WISHLISTS == 'true'){
 } else {
         define('ALLOW_MULTIPLE_WISHLISTS', false);}
 if(DISPLAY_CATEGORY_FILTER == 'true'){
-        define('UN_DISPLAY_CATEGORY_FILTER', true);
+        define('DISPLAY_CATEGORY_FILTER', true);
 } else {
-        define('UN_DISPLAY_CATEGORY_FILTER', false);}
+        define('DISPLAY_CATEGORY_FILTER', false);}
 if(ALLOW_MULTIPLE_PRODUCTS_CART_COMPACT == 'true'){
         define('ALLOW_MULTIPLE_PRODUCTS_CART_COMPACT', true);
 } else {
